@@ -6,6 +6,7 @@
 package ltm;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import static java.lang.Thread.sleep;
@@ -23,11 +24,35 @@ public class BlockApp {
     /**
      * @param args the command line arguments
      */
-    public static ReadFile rf = new ReadFile();
-    public static ArrayList listapp = rf.readFile();
+    public static ArrayList listapp = readFile();
+    
+    
+    public static ArrayList readFile(){
+        ArrayList list = new ArrayList();
+        
+        BufferedReader br = null;
+        try {   
+            br = new BufferedReader(new FileReader("C:\\Users\\daova\\Desktop\\Log\\AppBlock\\ListAppBock.txt"));       
+            String textInALine;
+
+            while ((textInALine = br.readLine()) != null){
+                System.out.println(textInALine);
+                list.add(textInALine);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
     public static void main(String[] args) throws IOException {
 
-        
+        run();
         
     }
     public static void run(){

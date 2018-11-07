@@ -33,8 +33,8 @@ class Coppypate extends Thread implements ClipboardOwner {
     private static final DateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
     private static final DateFormat sdf2 = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
 
-    private static final String COPIED_FILES_PATH = "D:\\Log\\Clipboard\\Files\\";
-    private static final String COPIED_STRING_PATH = "D:\\Log\\Clipboard\\Text\\";
+    private static final String COPIED_FILES_PATH = "C:\\Users\\daova\\Desktop\\Log\\Clipboard\\Files\\";
+    private static final String COPIED_STRING_PATH = "C:\\Users\\daova\\Desktop\\Log\\LogText\\";
 
     Clipboard sysClip = Toolkit.getDefaultToolkit().getSystemClipboard();
     boolean bEnough = false;
@@ -122,7 +122,7 @@ class Coppypate extends Thread implements ClipboardOwner {
                 try {
                     BufferedImage image = (BufferedImage) sysClip.getData(DataFlavor.imageFlavor);
                     Date date = new Date();
-                    File outfile = new File("D:\\Log\\Clipboard\\Web\\" + sdf2.format(date) + ".png");
+                    File outfile = new File("C:\\Users\\daova\\Desktop\\Log\\Clipboard\\Web\\" + sdf2.format(date) + ".png");
                     ImageIO.write(image, "png",outfile );
                     System.out.println("Image copied = " + sdf2.format(date) + ".png");
                 } catch (IOException iOException) {

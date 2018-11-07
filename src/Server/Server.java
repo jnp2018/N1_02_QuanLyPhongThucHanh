@@ -52,8 +52,11 @@ public class Server {
                 } catch (IOException ex) {
                     System.out.println("Can't get socket input stream. ");
                 }
+
                 try {
-                    out = new FileOutputStream("C:\\Users\\daova\\Desktop\\output\\ReceivedTmp.txt");
+                    String host = s.getInetAddress().toString();
+                    host = host.replace(".", "_");
+                    out = new FileOutputStream("C:\\Users\\daova\\Desktop\\output\\" + host + "ReceivedTmp.txt");
                 } catch (FileNotFoundException ex) {
                     System.out.println("File not found. ");
                 }
@@ -106,20 +109,24 @@ class ClientHandler extends Thread {
 //            System.out.println("1111111111111111");
 //            Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-        
+
         while (true) {
 
             try {
-                
+
+                // thread sleep ...
+                // break condition , close sockets and the like ...
                 receiveFile(this.s, is, os);
                 appendFile();
-                
+                Thread.sleep(100000);
 
             } catch (IOException e) {
                 System.out.println("sssssssssss");
                 e.printStackTrace();
                 Server.listsButton.get(getClient(this.s)).setBackground(Color.red);
                 break;
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -172,15 +179,16 @@ class ClientHandler extends Thread {
     }
 
     public void appendFile() throws FileNotFoundException, IOException {
-
-        String input = "C:\\Users\\daova\\Desktop\\output\\ReceivedTmp.txt";
+        String host = s.getInetAddress().toString();
+        host = host.replace(".", "_");
+        String input = "C:\\Users\\daova\\Desktop\\output\\" + host + "ReceivedTmp.txt";
         FileInputStream fis = new FileInputStream(new File(input));
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
         String line;
         while ((line = br.readLine()) != null) {
             line = line.trim();
             if (line != null && !line.isEmpty()) {
-                FileWriter fw = new FileWriter(new File("C:\\Users\\daova\\Desktop\\output\\Log.txt"), true);
+                FileWriter fw = new FileWriter(new File("C:\\Users\\daova\\Desktop\\output\\" + host + "Log.txt"), true);
                 try (BufferedWriter bw = new BufferedWriter(fw)) {
                     bw.newLine();
                     bw.write(line);

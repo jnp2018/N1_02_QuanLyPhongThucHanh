@@ -22,7 +22,7 @@ public class ReadFile {
         
         BufferedReader br = null;
         try {   
-            br = new BufferedReader(new FileReader("D:\\Log\\AppBlock\\ListAppBock.txt"));       
+            br = new BufferedReader(new FileReader("C:\\Users\\daova\\Desktop\\Log\\AppBlock\\ListAppBock.txt"));       
             String textInALine;
 
             while ((textInALine = br.readLine()) != null){

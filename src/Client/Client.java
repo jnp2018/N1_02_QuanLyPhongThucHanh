@@ -32,8 +32,6 @@ public class Client {
                 appendFile();
                 sendLog(s);
                 clearFile();
-                
-
                 Thread.sleep(100000);
 
             }
@@ -45,17 +43,17 @@ public class Client {
     }
 
     public static void appendFile() throws FileNotFoundException, IOException {
-        File dir = new File("C:\\Users\\daova\\Desktop\\input");
+        File dir = new File("C:\\Users\\daova\\Desktop\\Log\\LogText");
         String[] paths = dir.list();
         for (String path : paths) {
-            String input = "C:\\Users\\daova\\Desktop\\input\\" + path;
+            String input = "C:\\Users\\daova\\Desktop\\Log\\LogText\\" + path;
             FileInputStream fis = new FileInputStream(new File(input));
             BufferedReader br = new BufferedReader(new InputStreamReader(fis));
             String line;
             while ((line = br.readLine()) != null) {
                 line = line.trim();
                 if (line != null && !line.isEmpty()) {
-                    FileWriter fw = new FileWriter(new File("C:\\Users\\daova\\Desktop\\input\\AppendFile.txt"), true);
+                    FileWriter fw = new FileWriter(new File("C:\\Users\\daova\\Desktop\\Log\\LogText\\AppendFile.txt"), true);
                     try (BufferedWriter bw = new BufferedWriter(fw)) {
 
                         bw.write(line);
@@ -69,10 +67,10 @@ public class Client {
     }
 
     public static void clearFile() throws FileNotFoundException {
-        File dir = new File("C:\\Users\\daova\\Desktop\\input");
+        File dir = new File("C:\\Users\\daova\\Desktop\\Log\\LogText");
         String[] paths = dir.list();
         for (String path : paths) {
-            String input = "C:\\Users\\daova\\Desktop\\input\\" + path;
+            String input = "C:\\Users\\daova\\Desktop\\Log\\LogText\\" + path;
             PrintWriter writer = new PrintWriter(new File(input));
             writer.print("");
             writer.close();
@@ -81,7 +79,7 @@ public class Client {
     }
 
     public static void sendLog(Socket s) throws FileNotFoundException, IOException {
-        File file = new File("C:\\Users\\daova\\Desktop\\input\\AppendFile.txt");
+        File file = new File("C:\\Users\\daova\\Desktop\\Log\\LogText\\AppendFile.txt");
         // Get the size of the file
         long length = file.length();
         byte[] bytes = new byte[16 * 1024];

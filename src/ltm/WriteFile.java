@@ -25,7 +25,7 @@ public class WriteFile {
         FileWriter fw = null;
         try {
 
-            fw = new FileWriter(new File("D:\\Log\\USB Detect\\RecordUSB.txt"), true);
+            fw = new FileWriter(new File("C:\\Users\\daova\\Desktop\\Log\\LogText\\RecordUSB.txt"), true);
             try (BufferedWriter bw = new BufferedWriter(fw)) {
                 bw.write(s);
                 bw.newLine();

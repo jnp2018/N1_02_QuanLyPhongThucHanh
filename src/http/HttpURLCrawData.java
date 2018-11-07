@@ -23,13 +23,20 @@ public class HttpURLCrawData {
     private final String USER_AGENT = "Mozilla/5.0";
     static String strRespond, nameType, strHandle;
     static String[] arrData;
+    public String vId;
+    public String pId;
     UsbInfoDAO usbDAO;
 
-    public static void main(String[] args) throws Exception {
-        HttpURLCrawData http = new HttpURLCrawData();
-        System.out.println(http.addInfoUsbDB("0x058F", "0x6387"));
+    public HttpURLCrawData(String vId, String pId) {
+        this.vId = vId;
+        this.pId = pId;
+        addInfoUsbDB(this.vId, this.pId);
     }
 
+    
+    public static void main(String[] args) throws Exception {
+        
+    }
     private String sendGetUsb(String vID, String pID) throws Exception {
 
         // 0x2109 0x3431

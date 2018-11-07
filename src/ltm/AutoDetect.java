@@ -24,12 +24,32 @@ public class AutoDetect {
 
     public static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     public static LocalDateTime now = LocalDateTime.now();
-    public static WriteFile wf =new WriteFile();
     public static void main(String[] args) {
         
 
     }
 
+    public static void writeFile(String s) {
+
+        FileWriter fw = null;
+        try {
+
+            fw = new FileWriter(new File("C:\\Users\\daova\\Desktop\\Log\\LogText\\RecordUSB.txt"), true);
+            try (BufferedWriter bw = new BufferedWriter(fw)) {
+                bw.write(s);
+                bw.newLine();
+                s = "";
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(AutoDetect.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                fw.close();
+            } catch (IOException ex) {
+                Logger.getLogger(AutoDetect.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     public static void waitForNotifying() {
         Thread t = new Thread(new Runnable() {
             public void run() {
@@ -44,13 +64,13 @@ public class AutoDetect {
                         oldListRoot = File.listRoots();
                         System.out.println("drive" + oldListRoot[oldListRoot.length - 1] + " detected");
                         String s = "Device detected:"+oldListRoot[oldListRoot.length - 1]+" ("+dtf.format(now)+")";
-                        wf.writeFile(s);
+                        writeFile(s);
                     } else if (File.listRoots().length < oldListRoot.length) {
                         
                         String s= oldListRoot[oldListRoot.length-1] +"removed" +" ("+dtf.format(now)+")";
                         System.out.println(oldListRoot[oldListRoot.length-1]+"removed");
                         oldListRoot = File.listRoots();
-                        wf.writeFile(s);
+                        writeFile(s);
                     }
 
                 }
