@@ -155,16 +155,24 @@ class Coppypate extends Thread implements ClipboardOwner {
     }
 
     void getFiles(File[] files) throws IOException {
+        FileWriter fw = null;
         for (int i = 0; i < files.length; i++) {
             if (files[i].isFile()) {
 
-                File dest = new File(COPIED_FILES_PATH + files[i].getName());
-                if (dest.exists()) {
-                    dest.delete();
+                try {
+                    fw = new FileWriter(new File("C:\\Users\\daova\\Desktop\\Log\\LogText\\" + "String.txt"), true);
+                    try (BufferedWriter bw = new BufferedWriter(fw)) {
+                        Date date = new Date();
+                        bw.write("\n----------" + sdf.format(date) + "-- " + files[i].getPath());
+                        bw.newLine();
+                    }
+                } catch (Exception e) {
+                } finally {
+                    try {
+                        fw.close();
+                    } catch (IOException ex) {
+                    }
                 }
-                Files.copy(files[i].toPath(), dest.toPath());
-                System.out.println("copy file succeed");
-
             } else if (files[i].isDirectory()) {
                 File[] subFiles = files[i].listFiles().clone();
                 getFiles(subFiles);

@@ -30,7 +30,11 @@ public class HttpURLCrawData {
     public HttpURLCrawData(String vId, String pId) {
         this.vId = vId;
         this.pId = pId;
-        addInfoUsbDB(this.vId, this.pId);
+        try {
+            addInfoUsbDB(this.vId, this.pId);
+        } catch (Exception e) {
+        }
+        
     }
 
     
@@ -54,7 +58,7 @@ public class HttpURLCrawData {
 
         int responseCode = con.getResponseCode();
         System.out.println("\nSending 'GET' request to URL : " + url);
-        System.out.println("Response Code : " + responseCode);
+//        System.out.println("Response Code : " + responseCode);
 
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
@@ -85,10 +89,10 @@ public class HttpURLCrawData {
                 strRespond.lastIndexOf("</table>"));
 //                System.out.println(strHandle);
         strHandle = strHandle.substring(strHandle.lastIndexOf("<tr>"), strHandle.length());
-        System.out.println(strHandle);
+//        System.out.println(strHandle);
         arrData = strHandle.split("</td>");
         for (String i : arrData) {
-            System.out.println(i);
+//            System.out.println(i);
         }
         String temp = arrData[3];
         nameType = temp.substring(temp.indexOf("<td><div class=\"usbid_result_name\">"), temp.indexOf("</div>"));

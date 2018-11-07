@@ -51,22 +51,25 @@ public class ListDevices {
                         throw new LibUsbException(
                                 "Unable to read device descriptor", result);
                     }
-//                System.out.format(
-//                    "Bus %03d, Device %03d: Vendor %04x, Product %04x, Manufacturer %04x, bcdUSB %04x%n",
-//                        
-//                    busNumber, address, descriptor.idVendor(),
-//                    descriptor.idProduct(),descriptor.iManufacturer(),descriptor.bcdUSB());
+                System.out.format(
+                    "Bus %03d, Device %03d: Vendor %04x, Product %04x, Manufacturer %04x, bcdUSB %04x%n",
+                        
+                    busNumber, address, descriptor.idVendor(),
+                    descriptor.idProduct(),descriptor.iManufacturer(),descriptor.bcdUSB());
 
                     short vId = descriptor.idVendor();
-                    short pId = descriptor.iProduct();
+                    short pId = descriptor.idProduct();
+                    
 
                     String hexVId = Integer.toHexString(vId & 0xffff);
                     String hexPId = Integer.toHexString(pId & 0xffff);
+                    System.out.println(add(hexVId));
+                    System.out.println(add(hexPId));
 
-                    HttpURLCrawData http = new HttpURLCrawData(hexVId, hexPId);
+                    HttpURLCrawData http = new HttpURLCrawData(add(hexVId), add(hexPId));
                     hexVId = "";
                     hexPId = "";
-                    Thread.sleep(50000);
+                    Thread.sleep(2000);
 
 //                short s =5 ;
 //                System.out.println(""+ descriptor.idVendor());
@@ -79,7 +82,7 @@ public class ListDevices {
 
             // Deinitialize the libusb context
             LibUsb.exit(context);
-            Thread.sleep(3000);
+            Thread.sleep(180000);
         }
     }
 
